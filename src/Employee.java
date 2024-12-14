@@ -61,4 +61,10 @@ public class Employee {
     public int hashCode() {
         return Objects.hash(name, department, salary, id);
     }
+
+    public void printEmployeeWithoutDepartment (){
+        System.out.println("имя: " + name +
+                ", id = " + id +
+                ", зарплата: " + salary);
+    }
 }
