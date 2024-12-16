@@ -2,15 +2,16 @@ public class EmployeeBook {
     private Employee[] employees;
     private int size;
 
-    public EmployeeBook(){
+    public EmployeeBook() {
         employees = new Employee[10];
     }
 
-    public boolean addEmployee (String name, int department, int salary){
+    public boolean addEmployee(String name, int department, int salary) {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] == null) {
                 Employee newEmployee = new Employee(name, department, salary);
                 employees[i] = newEmployee;
+                size++;
                 return true;
             }
         }
@@ -19,14 +20,19 @@ public class EmployeeBook {
 
     public void deleteEmployee(int id) {
         for (int i = 0; i < employees.length; i++) {
+            if (employees[i] == null) continue;
             if (employees[i].getId() == id) {
                 employees[i] = null;
+                size--;
             }
         }
     }
 
+
+
     public Employee getEmployeeById(int id) {
         for (Employee employee : employees) {
+            if (employee == null) continue;
             if (employee.getId() == id) {
                 return employee;
             }
@@ -37,22 +43,26 @@ public class EmployeeBook {
     public void printEmployees() {
         System.out.println("список всех сотрудников: ");
         for (Employee employee : employees) {
+            if (employee == null) continue;
             System.out.println(employee);
+
         }
     }
 
     public int getTotalSalary() {
         int totalSalaryPerMonth = 0;
         for (Employee employee : employees) {
+            if (employee == null) continue;
             totalSalaryPerMonth += employee.getSalary();
         }
         return totalSalaryPerMonth;
     }
 
     public Employee getEmployeeWithMinSalary() {
-        int minSalary = employees[0].getSalary();
-        Employee employeeWithMinSalary = employees[0];
+        int minSalary = Integer.MAX_VALUE;
+        Employee employeeWithMinSalary = null;
         for (Employee employee : employees) {
+            if (employee == null) continue;
             if (employee.getSalary() < minSalary) {
                 minSalary = employee.getSalary();
                 employeeWithMinSalary = employee;
@@ -61,10 +71,12 @@ public class EmployeeBook {
         return employeeWithMinSalary;
     }
 
+
     public Employee getEmployeeWithMaxSalary() {
-        int maxSalary = employees[0].getSalary();
-        Employee employeeWithMaxSalary = employees[0];
+        int maxSalary = Integer.MIN_VALUE;
+        Employee employeeWithMaxSalary = null;
         for (Employee employee : employees) {
+            if (employee == null) continue;
             if (employee.getSalary() > maxSalary) {
                 maxSalary = employee.getSalary();
                 employeeWithMaxSalary = employee;
@@ -73,13 +85,14 @@ public class EmployeeBook {
         return employeeWithMaxSalary;
     }
 
-    public  int getAverageSalary() {
-        int averageSalary = getTotalSalary() / employees.length;
+    public int getAverageSalary() {
+        int averageSalary = getTotalSalary() / size;
         return averageSalary;
     }
 
     public void printEmployeesName() {
         for (Employee employee : employees) {
+            if (employee == null) continue;
             System.out.println(employee.getName());
         }
     }
@@ -87,28 +100,19 @@ public class EmployeeBook {
     // повышенная сложность:
     // 1.
     public void indexation(float percent) {
+        float percentageValue = (100 + percent) / 100;
         for (Employee employee : employees) {
-            float percentageValue = (100 + percent) / 100;
+            if (employee == null) continue;
             employee.setSalary((int) (employee.getSalary() * percentageValue));
         }
     }
 
     // 2.a.
     public Employee getEmployeeWithMinSalaryFromDepartment(int department) {
-        int minSalaryFromDepartment;
+        int minSalaryFromDepartment = Integer.MAX_VALUE;
         Employee employeeWithMinSalaryFromDepartment = null;
-        for (Employee employee : employees) {                     // находим первого сотрудника отдела и записываем его в
-            if (employee.getDepartment() == department) {         // переменную employeeWithMinSalaryFromDepartment
-                employeeWithMinSalaryFromDepartment = employee;
-                break;
-            }
-        }
-        if (employeeWithMinSalaryFromDepartment == null) {          //если нет сотрудников в отделе
-            System.out.println("в таком отделе нет сотрудников");
-            return null;
-        }
-        minSalaryFromDepartment = employeeWithMinSalaryFromDepartment.getSalary();
         for (Employee employee : employees) {
+            if (employee == null) continue;
             if (employee.getDepartment() == department && employee.getSalary() < minSalaryFromDepartment) {
                 minSalaryFromDepartment = employee.getSalary();
                 employeeWithMinSalaryFromDepartment = employee;
@@ -119,20 +123,10 @@ public class EmployeeBook {
 
     // 2.b.
     public Employee getEmployeeWithMaxSalaryFromDepartment(int department) {
-        int maxSalaryFromDepartment;
+        int maxSalaryFromDepartment = Integer.MIN_VALUE;
         Employee employeeWithMaxSalaryFromDepartment = null;
-        for (Employee employee : employees) {                     // находим первого сотрудника отдела и записываем его в
-            if (employee.getDepartment() == department) {         // переменную employeeWithMaxSalaryFromDepartment
-                employeeWithMaxSalaryFromDepartment = employee;
-                break;
-            }
-        }
-        if (employeeWithMaxSalaryFromDepartment == null) {          //если нет сотрудников в отделе
-            System.out.println("в таком отделе нет сотрудников");
-            return null;
-        }
-        maxSalaryFromDepartment = employeeWithMaxSalaryFromDepartment.getSalary();
         for (Employee employee : employees) {
+            if (employee == null) continue;
             if (employee.getDepartment() == department && employee.getSalary() > maxSalaryFromDepartment) {
                 maxSalaryFromDepartment = employee.getSalary();
                 employeeWithMaxSalaryFromDepartment = employee;
@@ -145,6 +139,7 @@ public class EmployeeBook {
     public int getTotalSalaryInDepartment(int department) {
         int totalSalaryInDepartment = 0;
         for (Employee employee : employees) {
+            if (employee == null) continue;
             if (employee.getDepartment() == department) {
                 totalSalaryInDepartment += employee.getSalary();
             }
@@ -156,6 +151,7 @@ public class EmployeeBook {
     public int getAverageSalaryInDepartment(int department) {
         int countEmployeesInDepartment = 0;
         for (Employee employee : employees) {
+            if (employee == null) continue;
             if (employee.getDepartment() == department) {
                 countEmployeesInDepartment++;
             }
@@ -167,8 +163,9 @@ public class EmployeeBook {
 
     // 2.e. Проиндексировать зарплату всех сотрудников отдела на процент, который приходит в качестве параметра
     public void indexationInDepartment(int department, float percent) {
+        float percentageValue = (100 + percent) / 100;
         for (Employee employee : employees) {
-            float percentageValue = (100 + percent) / 100;
+            if (employee == null) continue;
             if (employee.getDepartment() == department) {
                 employee.setSalary((int) (employee.getSalary() * percentageValue));
             }
@@ -179,6 +176,7 @@ public class EmployeeBook {
     // 2.f.  Напечатать всех сотрудников отдела (все данные, кроме отдела)
     public void printEmployeesDepartment(int department) {
         for (Employee employee : employees) {
+            if (employee == null) continue;
             if (employee.getDepartment() == department) {
                 employee.printEmployeeWithoutDepartment();
             }
@@ -189,6 +187,7 @@ public class EmployeeBook {
     // 3.a. Получить в качестве параметра число и вывести: Всех сотрудников с зп меньше числа (распечатать id, фио и зп в консоль)
     public void printSmallerSalary(int salary) {
         for (Employee employee : employees) {
+            if (employee == null) continue;
             if (employee.getSalary() < salary) {
                 employee.printEmployeeWithoutDepartment();
             }
@@ -199,12 +198,12 @@ public class EmployeeBook {
     // 3.b. Получить в качестве параметра число и вывести: Всех сотрудников с зп больше или равно числа (распечатать id, фио и зп в консоль)
     public void printBiggerSalary(int salary) {
         for (Employee employee : employees) {
+            if (employee == null) continue;
             if (employee.getSalary() >= salary) {
                 employee.printEmployeeWithoutDepartment();
             }
         }
     }
-
 
 
 }

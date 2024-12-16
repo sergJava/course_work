@@ -29,6 +29,11 @@ public class Main {
 
         System.out.println("удаление сотрудника..");
         employeeBook.deleteEmployee(7);
+        employeeBook.deleteEmployee(3);
+        employeeBook.deleteEmployee(9);
+        employeeBook.printEmployees();
+        System.out.println("добавление сотрудника..");
+        employeeBook.addEmployee("Иванов Иван11", 1, 900);
         employeeBook.printEmployees();
         printBound();
 
@@ -39,7 +44,7 @@ public class Main {
         printBound();
 
         System.out.println("получить сотрудника по id:");
-        System.out.println(employeeBook.getEmployeeById(8));
+        System.out.println(employeeBook.getEmployeeById(7));
         printBound();
 
         System.out.println("сумма затрат на зп в месяц: " + employeeBook.getTotalSalary());
