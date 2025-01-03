@@ -2,7 +2,7 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-readme.md
+readme2.md
 .idea
 *.iml
 
