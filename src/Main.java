@@ -44,7 +44,7 @@ public class Main {
         printBound();
 
         System.out.println("получить сотрудника по id:");
-        System.out.println(employeeBook.getEmployeeById(7));
+        System.out.println(employeeBook.getEmployeeById(6));
         printBound();
 
         System.out.println("сумма затрат на зп в месяц: " + employeeBook.getTotalSalary());

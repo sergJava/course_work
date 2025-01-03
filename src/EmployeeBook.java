@@ -20,8 +20,7 @@ public class EmployeeBook {
 
     public void deleteEmployee(int id) {
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i] == null) continue;
-            if (employees[i].getId() == id) {
+            if (employees[i] != null && employees[i].getId() == id) {
                 employees[i] = null;
                 size--;
             }
@@ -32,8 +31,7 @@ public class EmployeeBook {
 
     public Employee getEmployeeById(int id) {
         for (Employee employee : employees) {
-            if (employee == null) continue;
-            if (employee.getId() == id) {
+            if (employee != null && employee.getId() == id) {
                 return employee;
             }
         }
@@ -176,8 +174,7 @@ public class EmployeeBook {
     // 2.f.  Напечатать всех сотрудников отдела (все данные, кроме отдела)
     public void printEmployeesDepartment(int department) {
         for (Employee employee : employees) {
-            if (employee == null) continue;
-            if (employee.getDepartment() == department) {
+            if (employee != null && employee.getDepartment() == department) {
                 employee.printEmployeeWithoutDepartment();
             }
         }
@@ -187,8 +184,7 @@ public class EmployeeBook {
     // 3.a. Получить в качестве параметра число и вывести: Всех сотрудников с зп меньше числа (распечатать id, фио и зп в консоль)
     public void printSmallerSalary(int salary) {
         for (Employee employee : employees) {
-            if (employee == null) continue;
-            if (employee.getSalary() < salary) {
+            if (employee != null && employee.getSalary() < salary) {
                 employee.printEmployeeWithoutDepartment();
             }
         }
@@ -198,8 +194,7 @@ public class EmployeeBook {
     // 3.b. Получить в качестве параметра число и вывести: Всех сотрудников с зп больше или равно числа (распечатать id, фио и зп в консоль)
     public void printBiggerSalary(int salary) {
         for (Employee employee : employees) {
-            if (employee == null) continue;
-            if (employee.getSalary() >= salary) {
+            if (employee != null && employee.getSalary() >= salary) {
                 employee.printEmployeeWithoutDepartment();
             }
         }
